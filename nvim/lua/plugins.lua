@@ -33,13 +33,13 @@ vim.cmd([[
 return require('packer').startup(function(use)  
     use 'wbthomason/packer.nvim'                -- Package manager
     use 'github/copilot.vim'                    -- GitHub Copilot
-    use "lukas-reineke/indent-blankline.nvim"   -- Indentation lines
+    use 'lukas-reineke/indent-blankline.nvim'   -- Indentation lines
     
     use ({
         'projekt0n/github-nvim-theme',          -- GitHub colorscheme
         config = function()
             require('github-theme').setup({
-                theme_style = "dark_default"
+                theme_style = 'dark_default'
             })
         end
     })    
@@ -122,4 +122,3 @@ return require('packer').startup(function(use)
         require('packer').sync()
     end
 end)
-

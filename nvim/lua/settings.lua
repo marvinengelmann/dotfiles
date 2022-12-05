@@ -19,4 +19,4 @@ opt.splitbelow = true                   -- Put new windows below
 
 g.loaded_netrw = 1                      -- Disable netrw 
 g.loaded_netrwPlugin = 1                -- Disable netrw plugin
-g.mapleader = " "                       -- Leader key
+g.mapleader = ' '                       -- Leader key
