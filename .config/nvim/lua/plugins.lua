@@ -129,6 +129,12 @@ return require('packer').startup(function(use)
         end
     }
 
+    -- Displays a popup with possible keybindings
+    use {
+        "folke/which-key.nvim",
+        config = function()
+            vim.o.timeout = true
+            require("which-key").setup()
         end
     }
 
