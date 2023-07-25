@@ -1,14 +1,14 @@
-local keymap = vim.keymap                                   -- Vim keymaps
+local keymap = vim.keymap -- Vim keymaps
 
 -- Core Vim commands
-keymap.set('n', '<leader>sx', ':nohl<CR>')                  -- Clear search highlighting
+keymap.set('n', '<leader>cs', ':nohl<CR>', { desc = '[C]lear [S]earch' }) -- Clear search highlighting
 
 -- Hop plugin
-keymap.set('n', '<leader><leader>', ':HopWord<CR>')         -- Navigate to word
+keymap.set('n', '<leader><leader>', ':HopWord<CR>', { desc = 'Hop' }) -- Navigate to word
 
 -- Telescope plugin
-keymap.set('n', '<leader>ff', ':Telescope find_files<CR>')  -- Find files
-keymap.set('n', '<leader>fg', ':Telescope live_grep<CR>')   -- Search text in files
+keymap.set('n', '<leader>ff', ':Telescope find_files<CR>', { desc = '[F]ind [F]iles]' }) -- Find files
+keymap.set('n', '<leader>fg', ':Telescope live_grep<CR>', { desc = '[F]ind [G]rep]' }) -- Search text in files
 
 -- NvimTree plugin
-keymap.set('n', '<leader>e', ':NvimTreeToggle<CR>')         -- Toggle file explorer
+keymap.set('n', '<leader>s', ':NvimTreeToggle<CR>', { desc = 'Toggle [S]idebar' }) -- Toggle file explorer

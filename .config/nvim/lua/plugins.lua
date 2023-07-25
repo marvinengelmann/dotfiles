@@ -1,4 +1,4 @@
-local fn = vim.fn                               -- Access Vim functions
+local fn = vim.fn -- Access Vim functions
 
 -- Function to ensure packer is installed
 local ensure_packer = function()
@@ -6,7 +6,14 @@ local ensure_packer = function()
 
     -- If packer isn't installed, install it
     if fn.empty(fn.glob(install_path)) > 0 then
-        fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
+        fn.system({
+            'git',
+            'clone',
+            '--depth',
+            '1',
+            'https://github.com/wbthomason/packer.nvim',
+            install_path
+        })
         vim.cmd [[packadd packer.nvim]]
         return true
     end
@@ -23,9 +30,9 @@ vim.cmd([[
 ]])
 
 return require('packer').startup(function(use)
-    use 'wbthomason/packer.nvim'                -- Packer can manage itself
-    use 'github/copilot.vim'                    -- GitHub Copilot for AI-assisted coding
-    use 'lukas-reineke/indent-blankline.nvim'   -- Display indentation levels with lines
+    use 'wbthomason/packer.nvim' -- Packer can manage itself
+    use 'github/copilot.vim' -- GitHub Copilot for AI-assisted coding
+    use 'lukas-reineke/indent-blankline.nvim' -- Display indentation levels with lines
 
     -- GitHub theme for color scheme
     use {
@@ -36,6 +43,7 @@ return require('packer').startup(function(use)
                     transparent = true
                 }
             })
+
             vim.cmd('colorscheme github_dark_high_contrast')
         end
     }
@@ -68,11 +76,18 @@ return require('packer').startup(function(use)
     use {
         'nvim-telescope/telescope.nvim',
         config = function()
-            require('telescope').setup({fzf = {fuzzy = true, override_generic_sorter = true, override_file_sorter = true}})
+            require('telescope').setup({
+                fzf = {
+                    fuzzy = true,
+                    override_generic_sorter = true,
+                    override_file_sorter = true
+                }
+            })
+
             require('telescope').load_extension('fzf')
         end,
         requires = {
-            {'nvim-lua/plenary.nvim'},
+            'nvim-lua/plenary.nvim',
             {
                 'nvim-telescope/telescope-fzf-native.nvim',
                 run = 'make'
@@ -84,8 +99,15 @@ return require('packer').startup(function(use)
     use {
         'nvim-treesitter/nvim-treesitter',
         run = function()
-            require('nvim-treesitter.install').update({with_sync = true})
-            require('nvim-treesitter.configs').setup({autotag = {enable = true}})
+            require('nvim-treesitter.install').update({
+                with_sync = true
+            })
+
+            require('nvim-treesitter.configs').setup({
+                autotag = {
+                    enable = true
+                }
+            })
         end
     }
 
@@ -101,7 +123,12 @@ return require('packer').startup(function(use)
     use {
         'windwp/nvim-autopairs',
         config = function()
-            require('nvim-autopairs').setup({check_ts = true})
+            require('nvim-autopairs').setup({
+                check_ts = true
+            })
+        end
+    }
+
         end
     }
 
