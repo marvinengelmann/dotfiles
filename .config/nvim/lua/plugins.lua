@@ -29,6 +29,8 @@ vim.cmd([[
     augroup end
 ]])
 
+local packer_bootstrap = ensure_packer()
+
 return require('packer').startup(function(use)
     use 'wbthomason/packer.nvim' -- Packer can manage itself
     use 'github/copilot.vim' -- GitHub Copilot for AI-assisted coding
@@ -139,7 +141,7 @@ return require('packer').startup(function(use)
     }
 
     -- Sync if packer was installed
-    if ensure_packer() then
+    if packer_bootstrap then
         require('packer').sync()
     end
 end)
