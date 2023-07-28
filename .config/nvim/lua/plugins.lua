@@ -1,12 +1,8 @@
-local fn = vim.fn -- Access Vim functions
-
--- Function to ensure packer is installed
 local ensure_packer = function()
-    local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+    local install_path = vim.fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
 
-    -- If packer isn't installed, install it
-    if fn.empty(fn.glob(install_path)) > 0 then
-        fn.system({
+    if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
+        vim.fn.system({
             'git',
             'clone',
             '--depth',
@@ -14,14 +10,17 @@ local ensure_packer = function()
             'https://github.com/wbthomason/packer.nvim',
             install_path
         })
+
         vim.cmd [[packadd packer.nvim]]
+
         return true
     end
 
     return false
 end
 
--- Automatically recompiles when there are changes in plugins.lua
+local packer_bootstrap = ensure_packer()
+
 vim.cmd([[
     augroup packer_user_config
         autocmd!
@@ -29,28 +28,36 @@ vim.cmd([[
     augroup end
 ]])
 
-local packer_bootstrap = ensure_packer()
-
 return require('packer').startup(function(use)
-    use 'wbthomason/packer.nvim' -- Packer can manage itself
-    use 'github/copilot.vim' -- GitHub Copilot for AI-assisted coding
-    use 'lukas-reineke/indent-blankline.nvim' -- Display indentation levels with lines
+    use 'wbthomason/packer.nvim'
+    use 'github/copilot.vim'
+    use 'lukas-reineke/indent-blankline.nvim'
 
-    -- GitHub theme for color scheme
     use {
         'projekt0n/github-nvim-theme',
         config = function()
             require('github-theme').setup({
                 options = {
-                    transparent = true
+                    transparent = true,
+                    styles = {
+                        comments = 'italic',
+                        functions = 'italic',
+                        keywords = 'italic',
+                        variables = 'NONE',
+                        conditionals = 'NONE',
+                        constants = 'NONE',
+                        numbers = 'NONE',
+                        operators = 'NONE',
+                        strings = 'NONE',
+                        types = 'NONE'
+                    }
                 }
             })
 
-            vim.cmd('colorscheme github_dark_high_contrast')
+            vim.cmd('colorscheme github_dark')
         end
     }
 
-    -- File explorer plugin
     use {
         'nvim-tree/nvim-tree.lua',
         config = function()
@@ -58,7 +65,6 @@ return require('packer').startup(function(use)
         end
     }
 
-    -- Status line enhancement plugin
     use {
         'nvim-lualine/lualine.nvim',
         config = function()
@@ -66,7 +72,6 @@ return require('packer').startup(function(use)
         end
     }
 
-    -- Quick motion within the file using the Hop plugin
     use {
         'phaazon/hop.nvim',
         config = function()
@@ -74,7 +79,44 @@ return require('packer').startup(function(use)
         end
     }
 
-    -- Fuzzy finder plugin for quickly finding files and text
+    use {
+        'VonHeikemen/lsp-zero.nvim',
+        requires = {
+            'neovim/nvim-lspconfig',
+            {
+                'williamboman/mason.nvim',
+                run = function()
+                    pcall(vim.api.nvim_command, 'MasonUpdate')
+                end
+            },
+            'williamboman/mason-lspconfig.nvim',
+            'hrsh7th/nvim-cmp',
+            'hrsh7th/cmp-nvim-lsp',
+            'L3MON4D3/LuaSnip'
+        },
+        config = function()
+            local lsp = require('lsp-zero').preset('recommended')
+
+            lsp.on_attach(function(client, bufnr)
+                lsp.default_keymaps({
+                    buffer = bufnr
+                })
+            end)
+
+            lsp.ensure_installed({
+                'lua_ls',
+                'emmet_ls',
+                'eslint',
+                'tsserver',
+                'svelte',
+                'rust_analyzer',
+                'phpactor'
+            })
+
+            lsp.setup()
+        end    
+    }
+
     use {
         'nvim-telescope/telescope.nvim',
         config = function()
@@ -82,7 +124,8 @@ return require('packer').startup(function(use)
                 fzf = {
                     fuzzy = true,
                     override_generic_sorter = true,
-                    override_file_sorter = true
+                    override_file_sorter = true,
+                    case_mode = "smart_case"
                 }
             })
 
@@ -97,7 +140,6 @@ return require('packer').startup(function(use)
         }
     }
 
-    -- Syntax highlighting with Tree-sitter
     use {
         'nvim-treesitter/nvim-treesitter',
         run = function()
@@ -113,7 +155,6 @@ return require('packer').startup(function(use)
         end
     }
 
-    -- Auto close HTML/XML tags
     use {
         'windwp/nvim-ts-autotag',
         config = function()
@@ -121,7 +162,6 @@ return require('packer').startup(function(use)
         end
     }
 
-    -- Auto pairs for programming language constructs like (), {}, "", etc.
     use {
         'windwp/nvim-autopairs',
         config = function()
@@ -131,7 +171,6 @@ return require('packer').startup(function(use)
         end
     }
 
-    -- Displays a popup with possible keybindings
     use {
         "folke/which-key.nvim",
         config = function()
@@ -140,7 +179,6 @@ return require('packer').startup(function(use)
         end
     }
 
-    -- Sync if packer was installed
     if packer_bootstrap then
         require('packer').sync()
     end
