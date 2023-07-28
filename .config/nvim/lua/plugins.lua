@@ -41,7 +41,7 @@ return require('packer').startup(function(use)
                     transparent = true,
                     styles = {
                         comments = 'italic',
-                        functions = 'italic',
+                        functions = 'NONE',
                         keywords = 'italic',
                         variables = 'NONE',
                         conditionals = 'NONE',
@@ -59,16 +59,16 @@ return require('packer').startup(function(use)
     }
 
     use {
-        'nvim-tree/nvim-tree.lua',
+        'nvim-lualine/lualine.nvim',
         config = function()
-            require('nvim-tree').setup()
+            require('lualine').setup()
         end
     }
 
     use {
-        'nvim-lualine/lualine.nvim',
+        'nvim-tree/nvim-tree.lua',
         config = function()
-            require('lualine').setup()
+            require('nvim-tree').setup()
         end
     }
 
@@ -83,16 +83,16 @@ return require('packer').startup(function(use)
         'VonHeikemen/lsp-zero.nvim',
         requires = {
             'neovim/nvim-lspconfig',
+            'williamboman/mason-lspconfig.nvim',
+            'hrsh7th/nvim-cmp',
+            'hrsh7th/cmp-nvim-lsp',
+            'L3MON4D3/LuaSnip',
             {
                 'williamboman/mason.nvim',
                 run = function()
                     pcall(vim.api.nvim_command, 'MasonUpdate')
                 end
-            },
-            'williamboman/mason-lspconfig.nvim',
-            'hrsh7th/nvim-cmp',
-            'hrsh7th/cmp-nvim-lsp',
-            'L3MON4D3/LuaSnip'
+            }
         },
         config = function()
             local lsp = require('lsp-zero').preset('recommended')
@@ -114,30 +114,30 @@ return require('packer').startup(function(use)
             })
 
             lsp.setup()
-        end    
+        end
     }
 
     use {
         'nvim-telescope/telescope.nvim',
-        config = function()
-            require('telescope').setup({
-                fzf = {
-                    fuzzy = true,
-                    override_generic_sorter = true,
-                    override_file_sorter = true,
-                    case_mode = "smart_case"
-                }
-            })
-
-            require('telescope').load_extension('fzf')
-        end,
         requires = {
             'nvim-lua/plenary.nvim',
             {
                 'nvim-telescope/telescope-fzf-native.nvim',
                 run = 'make'
             }
-        }
+        },
+        config = function()
+            require('telescope').setup({
+                fzf = {
+                    fuzzy = true,
+                    override_generic_sorter = true,
+                    override_file_sorter = true,
+                    case_mode = 'smart_case'
+                }
+            })
+
+            require('telescope').load_extension('fzf')
+        end
     }
 
     use {
@@ -156,9 +156,11 @@ return require('packer').startup(function(use)
     }
 
     use {
-        'windwp/nvim-ts-autotag',
+        "folke/which-key.nvim",
         config = function()
-            require('nvim-ts-autotag').setup()
+            vim.o.timeout = true
+
+            require("which-key").setup()
         end
     }
 
@@ -172,10 +174,9 @@ return require('packer').startup(function(use)
     }
 
     use {
-        "folke/which-key.nvim",
+        'windwp/nvim-ts-autotag',
         config = function()
-            vim.o.timeout = true
-            require("which-key").setup()
+            require('nvim-ts-autotag').setup()
         end
     }
 
