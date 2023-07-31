@@ -105,15 +105,38 @@ return require('packer').startup(function(use)
 
             lsp.ensure_installed({
                 'lua_ls',
+                'bashls',
+                'jsonls',
+                'html',
                 'emmet_ls',
+                'cssls',
+                'tailwindcss',
                 'eslint',
                 'tsserver',
                 'svelte',
+                'intelephense',
                 'rust_analyzer',
-                'phpactor'
+                'terraformls',
+                'yamlls'
             })
 
             lsp.setup()
+
+            require('lspconfig').lua_ls.setup({
+                settings = {
+                    Lua = {
+                        diagnostics = {
+                            globals = {
+                                'vim'
+                            }
+                        },
+                        workspace = {
+                            checkThirdParty = false,
+                            library = vim.api.nvim_get_runtime_file("", true)
+                        }
+                    }
+                }
+            })
         end
     }
 
