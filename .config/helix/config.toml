@@ -1,11 +1,26 @@
 theme = "fleet_dark"
 
 [editor]
+true-color = true
+mouse = false
+bufferline = "multiple"
 line-number = "relative"
 rulers = [80]
-mouse = false
+soft-wrap.enable = true
+cursorline = true
 
 [editor.cursor-shape]
 insert = "bar"
 normal = "block"
 select = "underline"
+
+[editor.indent-guides]
+character = "╎"
+render = true
+
+[editor.lsp]
+auto-signature-help = false
+display-messages = true
+
+[editor.statusline]
+left = ["mode", "spinner", "version-control", "file-name"]
