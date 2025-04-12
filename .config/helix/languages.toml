@@ -6,6 +6,9 @@ args = ["--stdio"]
 command = "tailwindcss-language-server"
 args = ["--stdio"]
 
+[language-server.tailwindcss-language-server.config.tailwindCSS.experimental]
+classRegex = [["cva\\(([^)]*)\\)","[\"'`]([^\"'`]*).*?[\"'`]"]]
+
 [[language]]
 name = "tsx"
 scope = "source.tsx"
