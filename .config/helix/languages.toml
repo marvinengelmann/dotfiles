@@ -1,4 +1,20 @@
+[language-server.typescript-language-server]
+command = "typescript-language-server"
+args = ["--stdio"]
+
+[language-server.tailwindcss-language-server]
+command = "tailwindcss-language-server"
+args = ["--stdio"]
+
 [[language]]
-name = "typescript"
+name = "tsx"
+scope = "source.tsx"
+injection-regex = "(tsx)"
+language-id = "typescriptreact"
+file-types = ["tsx"]
+roots = ["package.json", "tsconfig.json"]
+comment-token = "//"
+block-comment-tokens = { start = "/*", end = "*/" }
+language-servers = ["typescript-language-server", "tailwindcss-language-server"]
+indent = { tab-width = 2, unit = "  " }
 auto-format = true
-formatter = { command = 'prettier', args = ["--parser", "typescript"] }
