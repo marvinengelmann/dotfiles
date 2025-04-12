@@ -3,7 +3,6 @@ theme = "fleet_dark"
 [editor]
 true-color = true
 mouse = false
-bufferline = "multiple"
 line-number = "relative"
 rulers = [80]
 soft-wrap.enable = true
