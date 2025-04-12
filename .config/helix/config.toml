@@ -23,3 +23,7 @@ display-messages = true
 
 [editor.statusline]
 left = ["mode", "spinner", "version-control", "file-name"]
+
+[editor.file-picker]
+hidden = false
+
