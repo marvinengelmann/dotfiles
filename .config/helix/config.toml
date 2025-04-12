@@ -4,7 +4,7 @@ theme = "fleet_dark"
 true-color = true
 mouse = false
 line-number = "relative"
-rulers = [80]
+rulers = [80, 120]
 soft-wrap.enable = true
 cursorline = true
 
