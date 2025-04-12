@@ -1,0 +1,11 @@
+theme = "fleet_dark"
+
+[editor]
+line-number = "relative"
+rulers = [80]
+mouse = false
+
+[editor.cursor-shape]
+insert = "bar"
+normal = "block"
+select = "underline"
