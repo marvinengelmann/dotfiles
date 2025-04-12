@@ -1,0 +1,13 @@
+.DS_Store
+/*
+!/.gitignore
+!/.config
+/.config/*
+!/.config/fish
+/.config/fish/*
+!/.config/fish/config.fish
+!/.config/ghostty
+!/.config/helix
+!/.config/posting
+!/.config/opencode
+!/.config/skhd

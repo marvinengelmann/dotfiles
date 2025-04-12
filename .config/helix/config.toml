@@ -1,0 +1,41 @@
+theme = "engelmann"
+
+[editor]
+true-color = true
+mouse = false
+line-number = "relative"
+rulers = [80, 120]
+soft-wrap.enable = true
+cursorline = true
+auto-completion = true
+
+[editor.cursor-shape]
+insert = "bar"
+normal = "block"
+select = "underline"
+
+[editor.indent-guides]
+character = "╎"
+render = true
+
+[editor.lsp]
+auto-signature-help = true
+display-messages = true
+
+[editor.auto-pairs]
+'(' = ')'
+'{' = '}'
+'[' = ']'
+'"' = '"'
+"'" = "'"
+'<' = '>'
+
+[editor.statusline]
+left = ["mode", "spinner", "version-control", "file-name"]
+
+[editor.file-picker]
+hidden = false
+
+[keys.normal]
+C-r = ":reload"
+
