@@ -1,0 +1,61 @@
+{
+  "theme": "Vercel Dark",
+  "ui_font_family": "Berkeley Mono",
+  "buffer_font_family": "Berkeley Mono",
+  "ui_font_size": 15,
+  "buffer_font_size": 15,
+  "use_smartcase_search": true,
+  "soft_wrap": "bounded",
+  "indent_guides": {
+    "coloring": "indent_aware"
+  },
+  "vim_mode": false,
+  "vim": {
+    "toggle_relative_line_numbers": true
+  },
+  "agent": {
+    "version": "2",
+    "button": false,
+    "default_model": {
+      "provider": "zed.dev",
+      "model": "claude-3-7-sonnet-latest"
+    }
+  },
+  "features": {
+    "edit_prediction_provider": "zed"
+  },
+  "edit_predictions": {
+    "mode": "subtle"
+  },
+  "tab_bar": {
+    "show_nav_history_buttons": false,
+    "show_tab_bar_buttons": false
+  },
+  "tabs": {
+    "file_icons": true,
+    "git_status": true
+  },
+  "toolbar": {
+    "breadcrumbs": false,
+    "quick_actions": false,
+    "selections_menu": false
+  },
+  "project_panel": {
+    "button": false
+  },
+  "git_panel": {
+    "button": false
+  },
+  "outline_panel": {
+    "button": false
+  },
+  "collaboration_panel": {
+    "button": false
+  },
+  "terminal": {
+    "button": false
+  },
+  "notification_panel": {
+    "button": false
+  }
+}

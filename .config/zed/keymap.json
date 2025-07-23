@@ -1,0 +1,14 @@
+[
+  {
+    "context": "Editor",
+    "use_key_equivalents": false,
+    "bindings": {
+      "cmd-/": [
+        "editor::ToggleComments",
+        {
+          "advance_downwards": false
+        }
+      ]
+    }
+  }
+]
