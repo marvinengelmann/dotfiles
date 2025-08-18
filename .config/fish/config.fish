@@ -8,3 +8,5 @@ fish_add_path /opt/homebrew/sbin
 fish_add_path /opt/homebrew/opt/libpq/bin
 fish_add_path /Users/marvinengelmann/.local/bin
 fish_add_path /Users/marvinengelmann/.bun/bin
+
+alias lg='lazygit'
