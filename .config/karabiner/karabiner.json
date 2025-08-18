@@ -1,9 +1,175 @@
 {
-    "profiles": [
-        {
-            "name": "Default profile",
-            "selected": true,
-            "virtual_hid_keyboard": { "keyboard_type_v2": "iso" }
-        }
-    ]
+  "profiles": [
+    {
+      "name": "ENGELMANN",
+      "selected": true,
+      "virtual_hid_keyboard": { "keyboard_type_v2": "iso" },
+      "complex_modifications": {
+        "rules": [
+          {
+            "description": "Hyper key",
+            "manipulators": [
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "caps_lock",
+                  "modifiers": {
+                    "optional": ["any"]
+                  }
+                },
+                "to": [
+                  {
+                    "key_code": "left_command",
+                    "modifiers": ["left_control", "left_option"]
+                  }
+                ],
+                "to_if_alone": [
+                  {
+                    "key_code": "vk_none"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "description": "Maximize window",
+            "manipulators": [
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "up_arrow",
+                  "modifiers": {
+                    "mandatory": ["left_control", "left_command", "left_option"]
+                  }
+                },
+                "to": [
+                  {
+                    "key_code": "f",
+                    "modifiers": ["fn", "left_control"]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "description": "Move window to left half",
+            "manipulators": [
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "left_arrow",
+                  "modifiers": {
+                    "mandatory": ["left_control", "left_command", "left_option"]
+                  }
+                },
+                "to": [
+                  {
+                    "key_code": "left_arrow",
+                    "modifiers": ["fn", "left_control"]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "description": "Move window to right half",
+            "manipulators": [
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "right_arrow",
+                  "modifiers": {
+                    "mandatory": ["left_control", "left_command", "left_option"]
+                  }
+                },
+                "to": [
+                  {
+                    "key_code": "right_arrow",
+                    "modifiers": ["fn", "left_control"]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "description": "Hide window",
+            "manipulators": [
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "down_arrow",
+                  "modifiers": {
+                    "mandatory": ["left_control", "left_command", "left_option"]
+                  }
+                },
+                "to": [
+                  {
+                    "key_code": "h",
+                    "modifiers": ["left_command"]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "description": "Finder",
+            "manipulators": [
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "f",
+                  "modifiers": {
+                    "mandatory": ["left_control", "left_command", "left_option"]
+                  }
+                },
+                "to": [
+                  {
+                    "shell_command": "osascript -e 'tell application \"Finder\" to activate' || open -a 'Finder'"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "description": "Safari",
+            "manipulators": [
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "b",
+                  "modifiers": {
+                    "mandatory": ["left_control", "left_command", "left_option"]
+                  }
+                },
+                "to": [
+                  {
+                    "shell_command": "osascript -e 'tell application \"Safari\" to activate' || open -a 'Safari'"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "description": "Warp",
+            "manipulators": [
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "spacebar",
+                  "modifiers": {
+                    "mandatory": ["left_control", "left_command", "left_option"]
+                  }
+                },
+                "to": [
+                  {
+                    "shell_command": "osascript -e 'tell application \"Warp\" to activate' || open -a 'Warp'"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
 }
