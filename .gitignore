@@ -8,7 +8,6 @@
 !/.config/fish
 /.config/fish/*
 !/.config/fish/config.fish
-!/.config/zed
-/.config/zed/*
-!/.config/zed/settings.json
-!/.config/zed/keymap.json
+!/.config/karabiner
+/.config/karabiner/*
+!/.config/karabiner/karabiner.json
