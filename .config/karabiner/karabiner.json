@@ -205,6 +205,120 @@
                 "type": "basic"
               }
             ]
+          },
+          {
+            "description": "Notes",
+            "manipulators": [
+              {
+                "from": {
+                  "key_code": "n",
+                  "modifiers": {
+                    "mandatory": ["left_control", "left_command", "left_option"]
+                  }
+                },
+                "to": [
+                  {
+                    "shell_command": "osascript -e 'tell application \"Notes\" to activate' || open -a 'Notes'"
+                  }
+                ],
+                "type": "basic"
+              }
+            ]
+          },
+          {
+            "description": "Reminders",
+            "manipulators": [
+              {
+                "from": {
+                  "key_code": "t",
+                  "modifiers": {
+                    "mandatory": ["left_control", "left_command", "left_option"]
+                  }
+                },
+                "to": [
+                  {
+                    "shell_command": "osascript -e 'tell application \"Reminders\" to activate' || open -a 'Reminders'"
+                  }
+                ],
+                "type": "basic"
+              }
+            ]
+          },
+          {
+            "description": "Mail",
+            "manipulators": [
+              {
+                "from": {
+                  "key_code": "m",
+                  "modifiers": {
+                    "mandatory": ["left_control", "left_command", "left_option"]
+                  }
+                },
+                "to": [
+                  {
+                    "shell_command": "osascript -e 'tell application \"Mail\" to activate' || open -a 'Mail'"
+                  }
+                ],
+                "type": "basic"
+              }
+            ]
+          },
+          {
+            "description": "Sketch",
+            "manipulators": [
+              {
+                "from": {
+                  "key_code": "v",
+                  "modifiers": {
+                    "mandatory": ["left_control", "left_command", "left_option"]
+                  }
+                },
+                "to": [
+                  {
+                    "shell_command": "osascript -e 'tell application \"Sketch\" to activate' || open -a 'Sketch'"
+                  }
+                ],
+                "type": "basic"
+              }
+            ]
+          },
+          {
+            "description": "Pixelmator Pro",
+            "manipulators": [
+              {
+                "from": {
+                  "key_code": "g",
+                  "modifiers": {
+                    "mandatory": ["left_control", "left_command", "left_option"]
+                  }
+                },
+                "to": [
+                  {
+                    "shell_command": "osascript -e 'tell application \"Pixelmator Pro\" to activate' || open -a 'Pixelmator Pro'"
+                  }
+                ],
+                "type": "basic"
+              }
+            ]
+          },
+          {
+            "description": "TablePlus",
+            "manipulators": [
+              {
+                "from": {
+                  "key_code": "d",
+                  "modifiers": {
+                    "mandatory": ["left_control", "left_command", "left_option"]
+                  }
+                },
+                "to": [
+                  {
+                    "shell_command": "osascript -e 'tell application \"TablePlus\" to activate' || open -a 'TablePlus'"
+                  }
+                ],
+                "type": "basic"
+              }
+            ]
           }
         ]
       }
