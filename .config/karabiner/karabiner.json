@@ -92,26 +92,6 @@
             ]
           },
           {
-            "description": "Hide window",
-            "manipulators": [
-              {
-                "from": {
-                  "key_code": "down_arrow",
-                  "modifiers": {
-                    "mandatory": ["left_control", "left_command", "left_option"]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "h",
-                    "modifiers": ["left_command"]
-                  }
-                ],
-                "type": "basic"
-              }
-            ]
-          },
-          {
             "description": "Finder",
             "manipulators": [
               {
