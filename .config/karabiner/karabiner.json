@@ -1,307 +1,248 @@
 {
-  "global": { "show_in_menu_bar": false },
-  "profiles": [
-    {
-      "name": "ENGELMANN",
-      "selected": true,
-      "virtual_hid_keyboard": { "keyboard_type_v2": "ansi" },
-      "complex_modifications": {
-        "parameters": {
-          "basic.to_delayed_action_delay_milliseconds": 50,
-          "basic.to_if_alone_timeout_milliseconds": 100,
-          "basic.to_if_held_down_threshold_milliseconds": 50
-        },
-        "rules": [
-          {
-            "description": "Hyper key",
-            "manipulators": [
-              {
-                "from": {
-                  "key_code": "caps_lock",
-                  "modifiers": { "optional": ["any"] }
+    "global": { "show_in_menu_bar": false },
+    "profiles": [
+        {
+            "complex_modifications": {
+                "parameters": {
+                    "basic.to_delayed_action_delay_milliseconds": 50,
+                    "basic.to_if_alone_timeout_milliseconds": 100,
+                    "basic.to_if_held_down_threshold_milliseconds": 50
                 },
-                "to": [
-                  {
-                    "key_code": "left_command",
-                    "modifiers": ["left_control", "left_option"]
-                  }
-                ],
-                "to_if_alone": [{ "key_code": "vk_none" }],
-                "type": "basic"
-              }
-            ]
-          },
-          {
-            "description": "Maximize window",
-            "manipulators": [
-              {
-                "from": {
-                  "key_code": "up_arrow",
-                  "modifiers": {
-                    "mandatory": ["left_control", "left_command", "left_option"]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "f",
-                    "modifiers": ["fn", "left_control"]
-                  }
-                ],
-                "type": "basic"
-              }
-            ]
-          },
-          {
-            "description": "Move window to left half",
-            "manipulators": [
-              {
-                "from": {
-                  "key_code": "left_arrow",
-                  "modifiers": {
-                    "mandatory": ["left_control", "left_command", "left_option"]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "left_arrow",
-                    "modifiers": ["fn", "left_control"]
-                  }
-                ],
-                "type": "basic"
-              }
-            ]
-          },
-          {
-            "description": "Move window to right half",
-            "manipulators": [
-              {
-                "from": {
-                  "key_code": "right_arrow",
-                  "modifiers": {
-                    "mandatory": ["left_control", "left_command", "left_option"]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "right_arrow",
-                    "modifiers": ["fn", "left_control"]
-                  }
-                ],
-                "type": "basic"
-              }
-            ]
-          },
-          {
-            "description": "Finder",
-            "manipulators": [
-              {
-                "from": {
-                  "key_code": "f",
-                  "modifiers": {
-                    "mandatory": ["left_control", "left_command", "left_option"]
-                  }
-                },
-                "to": [
-                  {
-                    "shell_command": "osascript -e 'tell application \"Finder\" to activate' || open -a 'Finder'"
-                  }
-                ],
-                "type": "basic"
-              }
-            ]
-          },
-          {
-            "description": "Safari",
-            "manipulators": [
-              {
-                "from": {
-                  "key_code": "b",
-                  "modifiers": {
-                    "mandatory": ["left_control", "left_command", "left_option"]
-                  }
-                },
-                "to": [
-                  {
-                    "shell_command": "osascript -e 'tell application \"Safari\" to activate' || open -a 'Safari'"
-                  }
-                ],
-                "type": "basic"
-              }
-            ]
-          },
-          {
-            "description": "Warp",
-            "manipulators": [
-              {
-                "from": {
-                  "key_code": "spacebar",
-                  "modifiers": {
-                    "mandatory": ["left_control", "left_command", "left_option"]
-                  }
-                },
-                "to": [
-                  {
-                    "shell_command": "osascript -e 'tell application \"Warp\" to activate' || open -a 'Warp'"
-                  }
-                ],
-                "type": "basic"
-              }
-            ]
-          },
-          {
-            "description": "Visual Studio Code",
-            "manipulators": [
-              {
-                "from": {
-                  "key_code": "e",
-                  "modifiers": {
-                    "mandatory": ["left_control", "left_command", "left_option"]
-                  }
-                },
-                "to": [
-                  {
-                    "shell_command": "osascript -e 'tell application \"Visual Studio Code\" to activate' || open -a 'Visual Studio Code'"
-                  }
-                ],
-                "type": "basic"
-              }
-            ]
-          },
-          {
-            "description": "Music",
-            "manipulators": [
-              {
-                "from": {
-                  "key_code": "a",
-                  "modifiers": {
-                    "mandatory": ["left_control", "left_command", "left_option"]
-                  }
-                },
-                "to": [
-                  {
-                    "shell_command": "osascript -e 'tell application \"Music\" to activate' || open -a 'Music'"
-                  }
-                ],
-                "type": "basic"
-              }
-            ]
-          },
-          {
-            "description": "Notes",
-            "manipulators": [
-              {
-                "from": {
-                  "key_code": "n",
-                  "modifiers": {
-                    "mandatory": ["left_control", "left_command", "left_option"]
-                  }
-                },
-                "to": [
-                  {
-                    "shell_command": "osascript -e 'tell application \"Notes\" to activate' || open -a 'Notes'"
-                  }
-                ],
-                "type": "basic"
-              }
-            ]
-          },
-          {
-            "description": "Reminders",
-            "manipulators": [
-              {
-                "from": {
-                  "key_code": "t",
-                  "modifiers": {
-                    "mandatory": ["left_control", "left_command", "left_option"]
-                  }
-                },
-                "to": [
-                  {
-                    "shell_command": "osascript -e 'tell application \"Reminders\" to activate' || open -a 'Reminders'"
-                  }
-                ],
-                "type": "basic"
-              }
-            ]
-          },
-          {
-            "description": "Mail",
-            "manipulators": [
-              {
-                "from": {
-                  "key_code": "m",
-                  "modifiers": {
-                    "mandatory": ["left_control", "left_command", "left_option"]
-                  }
-                },
-                "to": [
-                  {
-                    "shell_command": "osascript -e 'tell application \"Mail\" to activate' || open -a 'Mail'"
-                  }
-                ],
-                "type": "basic"
-              }
-            ]
-          },
-          {
-            "description": "Sketch",
-            "manipulators": [
-              {
-                "from": {
-                  "key_code": "v",
-                  "modifiers": {
-                    "mandatory": ["left_control", "left_command", "left_option"]
-                  }
-                },
-                "to": [
-                  {
-                    "shell_command": "osascript -e 'tell application \"Sketch\" to activate' || open -a 'Sketch'"
-                  }
-                ],
-                "type": "basic"
-              }
-            ]
-          },
-          {
-            "description": "Pixelmator Pro",
-            "manipulators": [
-              {
-                "from": {
-                  "key_code": "g",
-                  "modifiers": {
-                    "mandatory": ["left_control", "left_command", "left_option"]
-                  }
-                },
-                "to": [
-                  {
-                    "shell_command": "osascript -e 'tell application \"Pixelmator Pro\" to activate' || open -a 'Pixelmator Pro'"
-                  }
-                ],
-                "type": "basic"
-              }
-            ]
-          },
-          {
-            "description": "TablePlus",
-            "manipulators": [
-              {
-                "from": {
-                  "key_code": "d",
-                  "modifiers": {
-                    "mandatory": ["left_control", "left_command", "left_option"]
-                  }
-                },
-                "to": [
-                  {
-                    "shell_command": "osascript -e 'tell application \"TablePlus\" to activate' || open -a 'TablePlus'"
-                  }
-                ],
-                "type": "basic"
-              }
-            ]
-          }
-        ]
-      }
-    }
-  ]
+                "rules": [
+                    {
+                        "description": "Hyper key",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "caps_lock",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "left_command",
+                                        "modifiers": ["left_control", "left_option"]
+                                    }
+                                ],
+                                "to_if_alone": [{ "key_code": "vk_none" }],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Maximize window",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "up_arrow",
+                                    "modifiers": { "mandatory": ["left_control", "left_command", "left_option"] }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "f",
+                                        "modifiers": ["fn", "left_control"]
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Move window to left half",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "left_arrow",
+                                    "modifiers": { "mandatory": ["left_control", "left_command", "left_option"] }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "left_arrow",
+                                        "modifiers": ["fn", "left_control"]
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Move window to right half",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "right_arrow",
+                                    "modifiers": { "mandatory": ["left_control", "left_command", "left_option"] }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "right_arrow",
+                                        "modifiers": ["fn", "left_control"]
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Finder",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "f",
+                                    "modifiers": { "mandatory": ["left_control", "left_command", "left_option"] }
+                                },
+                                "to": [{ "shell_command": "osascript -e 'tell application \"Finder\" to activate' || open -a 'Finder'" }],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Safari",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "b",
+                                    "modifiers": { "mandatory": ["left_control", "left_command", "left_option"] }
+                                },
+                                "to": [{ "shell_command": "osascript -e 'tell application \"Safari\" to activate' || open -a 'Safari'" }],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Warp",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "spacebar",
+                                    "modifiers": { "mandatory": ["left_control", "left_command", "left_option"] }
+                                },
+                                "to": [{ "shell_command": "osascript -e 'tell application \"Warp\" to activate' || open -a 'Warp'" }],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Zed",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "e",
+                                    "modifiers": { "mandatory": ["left_control", "left_command", "left_option"] }
+                                },
+                                "to": [{ "shell_command": "osascript -e 'tell application \"Zed\" to activate' || open -a 'Zed'" }],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Music",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "a",
+                                    "modifiers": { "mandatory": ["left_control", "left_command", "left_option"] }
+                                },
+                                "to": [{ "shell_command": "osascript -e 'tell application \"Music\" to activate' || open -a 'Music'" }],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Notes",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "n",
+                                    "modifiers": { "mandatory": ["left_control", "left_command", "left_option"] }
+                                },
+                                "to": [{ "shell_command": "osascript -e 'tell application \"Notes\" to activate' || open -a 'Notes'" }],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Reminders",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "t",
+                                    "modifiers": { "mandatory": ["left_control", "left_command", "left_option"] }
+                                },
+                                "to": [{ "shell_command": "osascript -e 'tell application \"Reminders\" to activate' || open -a 'Reminders'" }],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Mail",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "m",
+                                    "modifiers": { "mandatory": ["left_control", "left_command", "left_option"] }
+                                },
+                                "to": [{ "shell_command": "osascript -e 'tell application \"Mail\" to activate' || open -a 'Mail'" }],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Sketch",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "v",
+                                    "modifiers": { "mandatory": ["left_control", "left_command", "left_option"] }
+                                },
+                                "to": [{ "shell_command": "osascript -e 'tell application \"Sketch\" to activate' || open -a 'Sketch'" }],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Pixelmator Pro",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "g",
+                                    "modifiers": { "mandatory": ["left_control", "left_command", "left_option"] }
+                                },
+                                "to": [{ "shell_command": "osascript -e 'tell application \"Pixelmator Pro\" to activate' || open -a 'Pixelmator Pro'" }],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "TablePlus",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "d",
+                                    "modifiers": { "mandatory": ["left_control", "left_command", "left_option"] }
+                                },
+                                "to": [{ "shell_command": "osascript -e 'tell application \"TablePlus\" to activate' || open -a 'TablePlus'" }],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Passwords",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "p",
+                                    "modifiers": { "mandatory": ["left_control", "left_command", "left_option"] }
+                                },
+                                "to": [{ "shell_command": "osascript -e 'tell application \"Passwords\" to activate' || open -a 'Passwords'" }],
+                                "type": "basic"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "name": "ENGELMANN",
+            "selected": true,
+            "virtual_hid_keyboard": { "keyboard_type_v2": "ansi" }
+        }
+    ]
 }
