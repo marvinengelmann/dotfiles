@@ -4,6 +4,7 @@
 !/.warp
 !/.config
 /.config/*
+!/.config/ghostty
 !/.config/helix
 !/.config/fish
 /.config/fish/*

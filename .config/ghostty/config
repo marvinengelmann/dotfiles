@@ -1,0 +1,6 @@
+theme = "Vercel"
+background = #000000
+window-padding-x = 10
+keybind = shift+enter=text:\x1b\r
+font-family = "GeistMono Nerd Font"
+font-size = 15
