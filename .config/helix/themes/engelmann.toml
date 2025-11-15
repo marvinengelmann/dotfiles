@@ -2,4 +2,5 @@ inherits = "base16_transparent"
 
 "ui.virtual.ruler" = { bg = "#0A0A0A" }
 "ui.cursorline.primary" = { bg = "#0A0A0A" }
-"ui.virtual.indent-guide" = { fg = "#1A1A1A" }
+"ui.virtual.indent-guide" = { fg = "#191919" }
+"ui.selection" = { bg = "#191919" }
