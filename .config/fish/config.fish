@@ -10,14 +10,15 @@ fish_add_path ~/.local/bin
 fish_add_path ~/.bun/bin
 
 set -x EDITOR hx
+set -x NNN_TMPFILE ~/.config/nnn/.lastd
 
 alias lg='lazygit'
+alias cc='claude'
 
-function n
-    set -l nnn_tmpfile ~/.config/nnn/.lastd
-    nnn -Hdeo $argv
-    if test -e $nnn_tmpfile
-        source $nnn_tmpfile
-        rm $nnn_tmpfile
+function nn
+    nnn -deHo $argv
+    if test -e $NNN_TMPFILE
+        source $NNN_TMPFILE
+        rm $NNN_TMPFILE
     end
 end
