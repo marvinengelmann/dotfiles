@@ -9,10 +9,6 @@ args = ["--stdio"]
 [language-server.tailwindcss-language-server.config.tailwindCSS.experimental]
 classRegex = [["cva\\(([^)]*)\\)","[\"'`]([^\"'`]*).*?[\"'`]"]]
 
-[language-server.emmet-ls]
-command = "emmet-ls"
-args = ["--stdio"]
-
 [[language]]
 name = "tsx"
 scope = "source.tsx"
@@ -22,7 +18,7 @@ file-types = ["tsx"]
 roots = ["package.json", "tsconfig.json"]
 comment-token = "//"
 block-comment-tokens = { start = "/*", end = "*/" }
-language-servers = ["typescript-language-server", "tailwindcss-language-server", "emmet-ls"]
+language-servers = ["typescript-language-server", "tailwindcss-language-server"]
 indent = { tab-width = 2, unit = "  " }
 auto-format = true
 formatter = { command = "prettier", args = ["--stdin-filepath", "%{buffer_name}"] }
