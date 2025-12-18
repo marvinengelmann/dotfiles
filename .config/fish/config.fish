@@ -16,7 +16,7 @@ alias lg='lazygit'
 alias cc='claude'
 
 function nn
-    nnn -deHo $argv
+    nnn -AdeHo $argv
     if test -e $NNN_TMPFILE
         source $NNN_TMPFILE
         rm $NNN_TMPFILE
