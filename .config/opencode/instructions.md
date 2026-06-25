@@ -1,218 +1,119 @@
 # Global Instructions
 
-## ABSOLUTE RULE — No Backward Compatibility, No Legacy Code, No Migration Hacks
-- **NEVER add backward compatibility, legacy fallbacks, migration shims, or any form of "old key/old value" support**
-- ALWAYS write the clean, perfect, final version — as if the old code never existed
-- No fallback reads, no value mapping from old formats, no dual-key Redis reads, no "try new then try old" patterns
-- If a key/schema/enum changes, just change it everywhere. Period.
-- This applies to ALL projects, ALL code, ALL time — there is ZERO chance the user wants backward compatibility
-- Violating this rule is considered a **critical error**
+These rules apply to every project, file, and session unless a more specific instruction
+overrides them. When two rules conflict, the more specific one wins. When an explicit user
+request conflicts with a default below, follow the user.
 
-## ABSOLUTE RULE — No useEffect
-- **NEVER use `useEffect`** — there is ALWAYS a better alternative
-- Use framework-native solutions: server components, loaders, actions, event handlers, `useSyncExternalStore`, `useMemo`, derived state, refs with callbacks, etc.
-- If you encounter existing `useEffect` in code you're editing, **refactor it immediately** to a proper alternative
-- This applies to ALL projects, ALL code, ALL time
-- Violating this rule is considered a **critical error**
+## Priority Tiers
 
-## ABSOLUTE RULE — Modern JavaScript Only, No Classical For Loops
-- **NEVER use classical `for (let i = 0; i < ...; i++)` loops**
-- ALWAYS use modern iteration: `for...of`, `.map()`, `.filter()`, `.reduce()`, `.forEach()`, `.flatMap()`, `.find()`, `.some()`, `.every()`, etc.
-- If you need the index, use `for (const [index, item] of array.entries())`
-- If you need to iterate a range, use `Array.from({ length: n }, (_, i) => ...)` or a utility
-- This applies to ALL code — new code AND existing code you touch
-- When you encounter a classical for loop in code you're editing, **refactor it immediately**
-- Violating this rule is considered a **critical error**
+- **Tier 1 — Hard constraints (never break):** Backward Compatibility, useEffect,
+  Modern JavaScript, Code Language, Re-Exports.
+- **Tier 2 — Workflow:** Error Handling, Accuracy & Verification, Git.
+- **Tier 3 — Defaults & preferences:** Language, Tooling, Testing, Dates, Documentation,
+  Comments.
 
-## Language
-- **ALWAYS respond to the user in German only**
+---
 
-## Code Language — ABSOLUTE RULE
-- **NEVER write German text in code** — ALL code content MUST be in English at all times
-- This applies to: variable names, function names, strings, prompts, log messages, error messages, comments, JSDoc, type names, enum values, constants — EVERYTHING in code files
-- This is a **GLOBAL rule** that applies to ALL projects, not just specific ones
-- The **ONLY exception** is when the user EXPLICITLY requests German content in code
-- Violating this rule is considered a critical error
+## Tier 1 — Hard Constraints
 
-## Package Manager & Runtime
-- **ALWAYS use `bun` as the package manager AND runtime**
-- Use `bun install`, `bun add`, `bun remove`, etc.
-- Use `bun run <script>` for package.json scripts
-- Use `bunx` instead of `npx` for one-off package execution
-- Never use `npm`, `yarn`, or `npx` commands
+### No Backward Compatibility
+Write only the clean, final version of the code, as if the previous version never existed.
+No legacy fallbacks, migration shims, dual-key reads, value mapping from old formats, or
+"try new then old" branches. When a key, schema, or enum changes, update every usage
+directly.
 
-## Testing
-- **ALWAYS use `bun run test` to run tests** (invokes Vitest via package.json script)
-- **NEVER use `bun test`** — that invokes Bun's built-in test runner which is incompatible with Vitest APIs (vi.mocked, vi.stubEnv, mock hoisting, etc.)
-
-## Date and Time Handling
-- **ALWAYS use `date-fns` library for all date and time operations**
-- Never use native JavaScript Date methods for complex date operations
-- Prefer date-fns functions like `format`, `parseISO`, `addDays`, `differenceInDays`, etc.
-
-## Documentation Lookup
-- **ALWAYS use the Context7 MCP server for documentation searches**
-- When looking up library docs, API references, or framework documentation, use `resolve-library-id` first, then `query-docs`
-- Never rely on potentially outdated training data when current documentation is available via Context7
-
-## Re-Exports — ABSOLUTE RULE
-- **NEVER create re-export files** (files that only re-export from another module)
-- Every module must contain its own implementation — no proxy/barrel files
-- Import directly from the source module, not through an intermediary
-- If you find an existing re-export file, **delete it** and update all imports to point to the source
-- Violating this rule is considered a **critical error**
-
-## Code Comments
-- **NEVER write comments in code** — code should be self-explanatory
-- The **only exception** is JSDoc/docstring comments for functions (describing purpose, parameters, return values)
-- Do not add inline comments, block comments, or TODO comments
-
-## Error Handling Policy
-- **NEVER ignore errors** — if you encounter or discover ANY error during your work (compilation errors, type errors, test failures, linting issues, runtime errors, etc.), you MUST fix ALL of them before continuing
-- This applies to ALL errors, including pre-existing ones — "it was already broken before" is NEVER an acceptable excuse to skip a fix
-- If you find errors while reading code, running tests, or building the project, treat them as blockers and fix every single one
-- Do NOT silently move on after encountering errors — always address them explicitly
-- If fixing an error is genuinely outside the current scope or requires user input, explicitly inform the user and ask how to proceed — never just ignore it
-
-## Accuracy and Verification
-- **NEVER make assumptions or invent information**
-- If you are not 100% certain about something (API usage, configuration, file paths, etc.), ALWAYS verify first by:
-  - Reading relevant files
-  - Checking documentation
-  - Searching the codebase
-  - Using appropriate tools (Grep, Glob, Read)
-- If you cannot verify something, explicitly ask the user for clarification
-- Never guess at implementation details, function signatures, or configurations
-- When in doubt, admit uncertainty and propose how to find the correct information
-
-## Git (General)
-- **NEVER use `git -C <path>`** — always run `git` directly from the working directory
-- **ALWAYS use `git --no-pager`** for diff, log, show
-
-## Git Commits
-
-### Important
-- **NEVER commit automatically or proactively** - only commit when the user explicitly asks to commit
-- Do NOT commit as part of other tasks unless specifically requested
-
-### Basic Principle
-When the user explicitly requests a commit: automatic generation of Git commit messages with Gitmoji emojis based on staged changes.
-
-### Commit Structure
-```
-[Emoji] [type]([scope]): [Subject - max 50 chars]
-
-[Optional: Body with detailed explanation]
-
-[Optional: Footer with "Closes #issue" or "BREAKING CHANGE: description"]
+```ts
+// Avoid
+const value = data.newKey ?? data.oldKey
+// Prefer
+const value = data.newKey
 ```
 
-### Structure Rules
-- **Emoji**: Exact matching Gitmoji at the beginning, followed by space
-- **Type**: feat, fix, refactor, chore, docs etc. matching the emoji
-- **Scope**: In parentheses, derived from file paths (e.g. 'auth' for 'src/auth/')
-- **Subject**: Imperative, capital first letter, no period at end
-- **Body**: Detailed explanation in paragraphs, separated by blank line
-- **Footer**: "Closes #issue" or "BREAKING CHANGE: description"
+### No useEffect
+Never use `useEffect`; there is always a better alternative. Prefer server components,
+loaders, actions, event handlers, `useSyncExternalStore`, `useMemo`, derived state, or ref
+callbacks. When editing code that contains `useEffect`, refactor it to a proper alternative.
 
-### Commit Splitting Logic
-Group changes by:
-- **Type**: Different types (feat, fix, docs) -> separate commits
-- **Context**: Group by scope or component
-- **File paths**: Unrelated directories -> separate commits
-- **Relationship**: Feature + tests = one commit
+```tsx
+// Avoid
+useEffect(() => { setFullName(`${first} ${last}`) }, [first, last])
+// Prefer
+const fullName = `${first} ${last}`
+```
 
-### Execution Protocol
-1. Analysis of the Git diff of staged changes
-2. Logical grouping of changes
-3. For each group:
-   - `git add <file(s)>` (if necessary)
-   - `git commit -m "<message>"`
-4. Confirmation: "Committed: [commit message]"
+### Modern JavaScript Only
+Never use classical index loops. Use `for...of`, `.map`, `.filter`, `.reduce`, `.forEach`,
+`.flatMap`, `.find`, `.some`, `.every`, and similar. For an index, use `array.entries()`.
+For a range, use `Array.from`. Refactor classical loops whenever you touch them.
 
-### Forbidden
-- **NEVER add "Co-Authored-By" lines or any other automated signatures to commit messages**
+```ts
+// Avoid
+for (let i = 0; i < items.length; i++) { handle(items[i]) }
+// Prefer
+for (const item of items) handle(item)
+for (const [index, item] of items.entries()) handle(index, item)
+Array.from({ length: n }, (_, i) => i)
+```
 
-### Special Rules
-- **BREAKING CHANGE**: When using breaking change emoji, always add footer
-- **Issue Extraction**: Use branch names (e.g. 'feature/123-login' -> "Closes #123")
-- **Priority**: feat > fix > refactor > chore
-- **No-Pager**: Always use `git --no-pager` for diff, log, show
-- **No `-C` flag**: Never use `git -C <path>` when already in the correct working directory — just run `git` directly
-- **Fallback**: If no matching emoji -> use general maintenance emoji
+### Code Language Is English
+All code content is English: identifiers, strings, prompts, logs, error messages, JSDoc,
+type names, enum values, and constants. The only exception is when the user explicitly asks
+for German content in code.
 
-### Gitmoji Reference (66 Emojis)
-- 🎨 Improve structure / format of the code.
-- ⚡️ Improve performance.
-- 🔥 Remove code or files.
-- 🐛 Fix a bug.
-- 🚑️ Critical hotfix.
-- ✨ Introduce new features.
-- 📝 Add or update documentation.
-- 🚀 Deploy stuff.
-- 💄 Add or update the UI and style files.
-- 🎉 Begin a project.
-- ✅ Add, update, or pass tests.
-- 🔒️ Fix security or privacy issues.
-- 🔐 Add or update secrets.
-- 🔖 Release / Version tags.
-- 🚨 Fix compiler / linter warnings.
-- 🚧 Work in progress.
-- 💚 Fix CI Build.
-- ⬇️ Downgrade dependencies.
-- ⬆️ Upgrade dependencies.
-- 📌 Pin dependencies to specific versions.
-- 👷 Add or update CI build system.
-- 📈 Add or update analytics or track code.
-- ♻️ Refactor code.
-- ➕ Add a dependency.
-- ➖ Remove a dependency.
-- 🔧 Add or update configuration files.
-- 🔨 Add or update development scripts.
-- 🌐 Internationalization and localization.
-- ✏️ Fix typos.
-- 💩 Write bad code that needs to be improved.
-- ⏪️ Revert changes.
-- 🔀 Merge branches.
-- 📦️ Add or update compiled files or packages.
-- 👽️ Update code due to external API changes.
-- 🚚 Move or rename resources (e.g.: files, paths, routes).
-- 📄 Add or update license.
-- 💥 Introduce breaking changes.
-- 🍱 Add or update assets.
-- ♿️ Improve accessibility.
-- 💡 Add or update comments in source code.
-- 🍻 Write code drunkenly.
-- 💬 Add or update text and literals.
-- 🗃️ Perform database related changes.
-- 🔊 Add or update logs.
-- 🔇 Remove logs.
-- 👥 Add or update contributor(s).
-- 🚸 Improve user experience / usability.
-- 🏗️ Make architectural changes.
-- 📱 Work on responsive design.
-- 🤖 Mock things.
-- 🥚 Add or update an easter egg.
-- 🙈 Add or update a .gitignore file.
-- 📸 Add or update snapshots.
-- ⚗️ Perform experiments.
-- 🔍️ Improve SEO.
-- 🏷️ Add or update types.
-- 🌱 Add or update seed files.
-- 🚩 Add, update, or remove feature flags.
-- 🥅 Catch errors.
-- 💫 Add or update animations and transitions.
-- ❌ Deprecate code that needs to be cleaned up.
-- 🛂 Work on code related to authorization, roles and permissions.
-- 🩹 Simple fix for a non-critical issue.
-- 🧐 Data exploration/inspection.
-- ⚰️ Remove dead code.
-- 🧪 Add a failing test.
-- 👔 Add or update business logic.
-- 🩺 Add or update healthcheck.
-- 🧱 Infrastructure related changes.
-- 🧑‍💻 Improve developer experience.
-- 💸 Add sponsorships or money related infrastructure.
-- 🧵 Add or update code related to multithreading or concurrency.
-- 🦺 Add or update code related to validation.
-- 📴 Improve offline support.
+### No Re-Export Files
+Every module contains its own implementation; no barrel or proxy files. Import directly from
+the source module. When you find a re-export file, delete it and repoint every import to the
+source.
+
+---
+
+## Tier 2 — Workflow
+
+### Error Handling
+Never leave an error unaddressed, including pre-existing ones you discover while reading,
+building, or testing — "it was already broken" is not a reason to skip a fix. Treat
+compilation, type, lint, test, and runtime errors as blockers and fix all of them. If a fix
+is genuinely out of scope or needs a decision, say so explicitly and ask how to proceed
+rather than moving on silently.
+
+### Accuracy & Verification
+Do not assume or invent details. If you are not certain about an API, path, signature, or
+configuration, verify first by reading files, searching the codebase (Grep, Glob, Read), or
+checking documentation. If you still cannot confirm it, state the uncertainty and ask
+instead of guessing.
+
+### Git
+- Run `git` from the working directory. Never use `git -C <path>`.
+- Use `git --no-pager` for `diff`, `log`, and `show`.
+- Never commit automatically or as a side effect of another task. Commit only when the user
+  explicitly asks.
+- For commits, follow the `/commit` command, which defines message format, Gitmoji usage,
+  and commit splitting. The Gitmoji table lives in `~/.config/opencode/gitmoji.md`.
+
+---
+
+## Tier 3 — Defaults & Preferences
+
+### Language
+Always respond to the user in German.
+
+### Package Manager & Runtime
+Use `bun` as both package manager and runtime: `bun install`, `bun add`, `bun remove`,
+`bun run <script>`, and `bunx`. Do not use `npm`, `yarn`, or `npx`.
+
+### Testing
+Run tests with `bun run test` (Vitest via package.json). Never use `bun test`, which runs
+Bun's built-in runner and is incompatible with Vitest APIs (`vi.mocked`, `vi.stubEnv`, mock
+hoisting, etc.).
+
+### Dates & Times
+Use `date-fns` (`format`, `parseISO`, `addDays`, `differenceInDays`, etc.) rather than
+native `Date` methods for anything non-trivial.
+
+### Documentation Lookup
+Use the Context7 MCP server for library and framework docs: call `resolve-library-id`
+first, then `query-docs`. Prefer current documentation over training-data recall.
+
+### Code Comments
+Code should be self-explanatory, so do not add inline, block, or TODO comments. The only
+exception is JSDoc/docstrings on functions describing purpose, parameters, and return value.
